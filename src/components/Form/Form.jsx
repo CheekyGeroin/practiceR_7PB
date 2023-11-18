@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { FormContainer, Label, Input, Button } from './Form.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors/selectors';
+import { selectContacts } from 'redux/selectors/selectors';
 import Notiflix from 'notiflix';
-import { addContact } from 'redux/contact/slice';
+import { addContact } from 'redux/operations/contactOperations';
 
 export const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const handleChange = e => {
@@ -37,7 +37,7 @@ export const Form = () => {
       reset();
       return;
     }
-    dispatch(addContact(name, number));
+    dispatch(addContact({ name, number }));
     reset();
   };
 
