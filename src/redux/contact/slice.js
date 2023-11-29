@@ -8,7 +8,7 @@ import {
 const contactSlice = createSlice({
   name: 'contacts',
   initialState: {
-    contacts: [],
+    items: [],
     isLoading: false,
     error: null,
   },
@@ -23,7 +23,7 @@ const contactSlice = createSlice({
     [fetchContacts.fulfilled]: (state, action) => {
       return {
         ...state,
-        contacts: [...action.payload],
+        items: [...action.payload],
         isLoading: false,
         error: null,
       };
@@ -44,7 +44,7 @@ const contactSlice = createSlice({
     [addContact.fulfilled]: (state, action) => {
       return {
         ...state,
-        contacts: [...state, ...action.payload],
+        items: [...state.items, action.payload],
         isLoading: false,
         error: null,
       };
@@ -64,8 +64,8 @@ const contactSlice = createSlice({
     [deleteContact.fulfilled]: (state, action) => {
       return {
         ...state,
-        contacts: [
-          ...state.contacts.filter(contact => contact.id !== action.payload.id),
+        items: [
+          ...state.items.filter(contact => contact.id !== action.payload.id),
         ],
         isLoading: false,
         error: null,
